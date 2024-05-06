@@ -1,0 +1,97 @@
+#include <iostream>
+using namespace std;
+
+class stack {
+     public:
+          
+          int top;
+          int* arr;
+          int size;
+
+          // cunstructor 
+          stack(int size){
+            arr = new int[size];
+            this->size = size;
+            top = -1;
+          }
+
+
+          // methods
+           
+           void pop(){
+            if(top==-1 ){
+               // stack is empty
+               cout<<"Stack is UnderFlow"<<endl;
+            }
+            else{
+              top--;
+            }
+                
+           }
+
+           void push(int data){
+               if(size-top >1){
+                 // space available
+                  top++;
+                  arr[top]=data;
+               }
+               else {
+                  // space is not available
+                  cout<<"Stack Overflow";
+               }
+           }
+
+           int getTop(){
+                if(top==-1){
+
+                  // stack is empty
+                   cout<<"Stack is UnderFlow"<<endl;
+                }
+                else {
+                       return arr[top];
+                }
+           }
+
+           bool isEmpty(){
+                
+               if(top==-1){
+                  return true;
+                }
+                else{
+                    return false;
+                }
+           }
+            
+            // number of valid elemnt present in the array ;
+           int getSize(){
+            
+                
+                    return top+1;
+                
+           }
+
+};
+
+int main() {
+  cout << "Hello world!" << endl;
+ stack s1(10);
+
+ // insertion 
+ s1.push(10);
+ s1.push(30);
+ s1.push(20);
+ s1.push(40);
+
+ // printing the stack
+ while(!s1.isEmpty()){
+    cout<<s1.getTop()<<" ";
+      s1.pop();
+ }
+ 
+ cout<<endl;
+  cout<<"print the size of the Stack:"<<s1.getSize()<<endl;
+
+ s1.pop();
+
+  return 0;
+}
