@@ -1,0 +1,73 @@
+#include <iostream>
+using namespace std;
+class stack {
+     public:
+          
+          int top1;
+          int top2;
+          int* arr;
+          int size;
+
+          // cunstructor 
+          stack(int size){
+            arr = new int[size];
+            this->size = size;
+            top1 = -1;
+            top2= size;
+          }
+
+
+          // methods
+           
+           void pop1(){
+            if(top1==-1 ){
+               // stack is empty
+               cout<<"In Stack 1 is UnderFlow"<<endl;
+            }
+            else{
+              top1--;
+            }
+                
+           }
+
+           void push1(int data){
+               if(top2-top1 == 1){
+                // space is not available
+                  cout<<"Stack 1 Overflow";
+               }
+               else {
+                    top1++;
+                    arr[top1] = data;
+               }
+           }
+
+
+            void pop2(){
+            if(top2==size ){
+               // stack is empty
+               cout<<"Stack 2 is UnderFlow"<<endl;
+            }
+            else{
+              top2++;
+            }
+                
+           }
+
+           void push2(int data){
+               if(top2-top1 == 1){
+                // space is not available
+                  cout<<"Stack 2 Overflow";
+               }
+               else {
+                    top2--;
+                    arr[top2] = data;
+               }
+           }
+
+};
+
+
+int main() {
+  cout << "Hello world!" << endl;
+  return 0;
+}
