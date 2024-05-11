@@ -1,0 +1,69 @@
+class Solution {
+public:
+    vector<int> prevSmallerElem(vector<int>& input) {
+
+        vector<int> ans(input.size());
+        stack<int> st;
+        st.push(-1);
+
+        for (int i = 0; i < input.size(); i++) {
+            int curr = input[i];
+
+            while (st.top() != -1 && input[st.top()] >= curr) {
+                st.pop();
+            }
+
+            ans[i] = st.top();
+
+            st.push(i);
+        }
+        return ans;
+    }
+
+    vector<int> nextSmallerElem(vector<int>& input) {
+
+        vector<int> ans(input.size());
+        stack<int> st;
+        st.push(-1);
+
+        for (int i = input.size() - 1; i >= 0; i--) {
+            int curr = input[i];
+
+            while (st.top() != -1 && input[st.top()] >= curr) {
+                st.pop();
+            }
+
+            ans[i] = st.top();
+
+            st.push(i);
+        }
+        return ans;
+    }
+
+    int largestRectangleArea(vector<int>& heights) {
+
+        vector<int> prev = prevSmallerElem(heights);
+
+        vector<int> next = nextSmallerElem(heights);
+
+        int maxArea = INT_MIN;
+
+        for (int i = 0; i < heights.size(); i++) {
+
+            int length = heights[i];
+ 
+
+      // this is the attention point 
+            if (next[i] == -1) {
+                next[i] = heights.size();
+            }
+            int width = next[i] - prev[i] - 1; // Here  is also need focus
+
+            int area = length * width;
+
+            maxArea = max(area, maxArea);
+        }
+
+        return maxArea;
+    }
+};
