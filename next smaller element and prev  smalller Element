@@ -1,0 +1,72 @@
+#include <iostream>
+#include<vector>
+#include<stack>
+using namespace std;
+
+  vector<int> prevSmallerElem(vector<int>&input){
+
+       vector<int>ans(input.size());
+       stack<int>st;
+       st.push(-1);
+
+      for(int i = 0;i<input.size();i++){
+        int curr = input[i];
+
+        while(st.top()>=curr){
+           st.pop();
+        }
+
+        ans[i] = st.top();
+
+        st.push(curr);
+      }
+      return ans;
+ }
+ 
+ vector<int> nextSmallerElem(vector<int>&input){
+
+       vector<int>ans(input.size());
+       stack<int>st;
+       st.push(-1);
+
+      for(int i = input.size()-1;i>=0;i--){
+        int curr = input[i];
+
+        while(st.top()>=curr){
+           st.pop();
+        }
+
+        ans[i] = st.top();
+
+        st.push(curr);
+      }
+      return ans;
+ }
+ 
+int main() {
+  
+   vector<int>input;
+   input.push_back(2);
+   input.push_back(1);
+   input.push_back(4);
+   input.push_back(3);
+
+      vector<int>ans=nextSmallerElem(input);
+
+      vector<int>ans1=prevSmallerElem(input);
+     
+      cout<<"printing ans : ";
+      for(int i = 0 ; i<ans.size();i++){
+        cout<<ans[i]<<" ";
+       }
+
+
+       cout<<endl;
+       cout<<"printing ans1 : ";
+       for(int i = 0 ; i<ans1.size();i++){
+        cout<<ans1[i]<<" ";
+       }
+
+
+  return 0;
+}
