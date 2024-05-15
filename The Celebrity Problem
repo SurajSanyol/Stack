@@ -1,0 +1,107 @@
+//{ Driver Code Starts
+//Initial template for C++
+
+#include<bits/stdc++.h>
+using namespace std;
+
+// } Driver Code Ends
+//User function template for C++
+
+class Solution 
+{
+    public:
+    //Function to find if there is a celebrity in the party or not.
+    int celebrity(vector<vector<int> >& M, int n) 
+    {
+        // code here 
+        
+        stack<int>s;
+        
+        // step 1: push all the element inot the  stack;
+         for(int i=0;i<n;i++)
+         {
+              s.push(i);
+         }
+         
+         // step 2: run discard method to get a mightBeCelebrety
+         
+         while(s.size()!=1)
+         {
+             int a = s.top();
+             s.pop();
+             
+             int b = s.top();
+             s.pop();
+             
+             
+             // if a knowns b
+              if(M[a][b]==1)
+             {
+                  // a discard 
+                  // b push again
+                  s.push(b);
+             } 
+             else
+             {
+                  // b discard
+                   //a push
+                   s.push(a);
+             }
+         }
+         
+         
+         // step 3 : check that single person is actually celebrity ?
+         
+          int mightBeCelibrity = s.top();
+          s.pop();
+          
+           //celibrity should not know anyone
+            for(int i = 0 ;i<n;i++)
+            {
+                 if(M[mightBeCelibrity][i]!=0)
+                 {
+                     return -1;
+                 }
+            }
+            
+             //celibrity should not known by  everyone
+             
+             for(int i=0;i<n;i++)
+             {
+                 if(M[i][mightBeCelibrity]==0 && i !=mightBeCelibrity )
+                 {
+                     return -1;
+                 }
+             }
+             
+             return mightBeCelibrity;
+         
+         
+    }
+};
+
+//{ Driver Code Starts.
+
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        int n;
+        cin>>n;
+        vector<vector<int> > M( n , vector<int> (n, 0));
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<n;j++)
+            {
+                cin>>M[i][j];
+            }
+        }
+        Solution ob;
+        cout<<ob.celebrity(M,n)<<endl;
+
+    }
+}
+
+// } Driver Code Ends
